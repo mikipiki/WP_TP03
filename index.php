@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TimConf</title>
 
-    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="<?php bloginfo(template_url); ?>/styles/main.css" />
 
-    <script src="scripts/main.js" defer></script>
+    <script src="<?php bloginfo(template_url); ?>/scripts/main.js" defer></script>
 </head>
 
 <body>
     <div class="site-container main-grid">
         <header class="header wrapper">
-            <a href="./index.html"><img src="assets/images/svg_logo_timconf.svg" alt="logo TimConf" />
+            <a href="./index.html"><img src="<?php bloginfo(template_url); ?>/assets/images/svg_logo_timconf.svg" alt="logo TimConf" />
             </a>
             <nav class="menu">
                 <div class="label"></div>
