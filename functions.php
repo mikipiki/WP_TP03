@@ -1,5 +1,7 @@
 <?php
 
+add_theme_support('post-thumbnails');
+
 // Register Custom Post Type
 function wp_conferencier() {
 
