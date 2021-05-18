@@ -91,58 +91,41 @@
             </div>
         </section>
 
+        
+
         <section class="conferenciers">
             <div class="wrapper">
                 <h2>Nos Conférenciers</h2>
 
                 <div class="grid_conf">
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_michael.png" alt="image conférencier" />
-                            <h4>Michaël Janes-Villiard</h4>
-                            <div class="title-speaker">Modélisateur 3D</div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_noemie.png" alt="image conférencier" />
-                            <h4>Noémie Tremblay</h4>
-                            <div class="title-speaker">Artiste</div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_julien.png" alt="image conférencier" />
-                            <h4>Julien Lacroix</h4>
-                            <div class="title-speaker">Artiste</div>
-                        </div>
-                    </a>
+                    
+                <?php if (have_posts()) : ?>
 
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_eleanor.png" alt="image conférencier" />
-                            <h4>Eleanor Rigby</h4>
-                            <div class="title-speaker">
-                                Modélisatrice 3D
+                    <?php
+                        query_posts(array(
+                            'post_type' => 'wp_conferencier',
+                            'post_status' => 'publish',
+                            'showposts' => -1,
+                        ));
+                    ?>
+
+                    <?php while (have_posts()) : the_post(); ?>
+
+                        <a href="">
+                            <div class="speaker">
+                                <?php the_post_thumbnail(); ?>
+                                <h4><?php the_title(); ?></h4>
+
+                                    <div class="title-speaker"><?php echo the_field('wp_conferencier_title'); ?></div>
+                                
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                        
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                    <p>Aucun article disponible!</p>
+                <?php endif; ?>
 
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_lucas.png" alt="" />
-                            <h4>Lucas Gagnon</h4>
-                            <div class="title-speaker">Artiste</div>
-                        </div>
-                    </a>
-
-                    <a href="">
-                        <div class="speaker">
-                            <img src="assets/images/img_william.png" alt="" />
-                            <h4>William Peak</h4>
-                            <div class="title-speaker">Modélisateur 3D</div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </section>
