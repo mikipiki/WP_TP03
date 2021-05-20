@@ -1,26 +1,13 @@
 
         <footer>
             <div class="wrapper">
-                <a href=""><img src="assets/images/svg_logo_timconf.svg" alt="logo TimConf" /></a>
-                <div class="menu_footer">
-                    <ul>
-                        <li>
-                            <a href="./index.html">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="./conferencier.html"> À propos</a>
-                        </li>
-                        <li>
-                            <a href="./conferencier.html">Conférenciers</a>
-                        </li>
-                        <li>
-                            <a href="./conferencier.html">Conférences</a>
-                        </li>
-                        <li>
-                            <a href="./index.html#forfaits">Forfaits</a>
-                        </li>
-                    </ul>
-                </div>
+            <a href="<?php bloginfo('url'); ?>"><img src="<?php echo the_field('wp_logo_site', 'option') ?>" alt="logo TimConf" />
+            </a>
+            <?php wp_nav_menu(array(
+				'theme_location' => 'menu_footer',
+				'container'      => 'div',
+                'container_class'=> 'menu_footer',
+			)); ?>
                 <div class="ligne"></div>
                 <div class="pos-footer">
                     <div class="icons">
