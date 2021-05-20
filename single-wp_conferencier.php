@@ -1,28 +1,23 @@
 <?php get_header(); ?>
 
-        <div class="hero-conf"></div>
+<?php if (have_posts()) : ?>
+
+    <?php while (have_posts()) :
+        the_post(); ?>
+
+
+        <div class="hero-conf set-bg" data-setbg="<?php echo the_field('wp_conferencier_hero'); ?>"></div>
 
         <div class="pres-conferencier wrapper">
             <div class="michael wrapper">
                 <div class="presentateur">
 
-                <?php if (have_posts()) : ?>
-                <?php while (have_posts()) : the_post(); ?>
-
-                <h1 class="title-mobile">
+                    <h1 class="title-mobile">
                         <?php the_title(); ?>
                     </h1>
                     <p class="paragraphe">
                         <?php the_content(); ?>
                     </p>
-
-                    
-                <?php endwhile; ?>
-                <?php else: ?>
-                <p>Aucun article disponible!</p>
-                <?php endif; ?>
-
-                  
                 </div>
 
                 <div class="icon-conferencier mobile">
@@ -41,40 +36,31 @@
                 </div>
 
                 <div class="conferences">
+
+                    <?php $posts = get_field('wp_conferenciers_conferences'); ?>
+                    <?php if ($posts): ?>
+
                     <h2 class="section-conf">Ses conférences</h2>
 
                     <div class="conferences-michael">
-
-
-                    <?php if (have_posts()) : ?>
-
-                    <?php
-                        query_posts(array(
-                            'post_type' => 'wp_conferences',
-                            'post_status' => 'publish',
-                            'showposts' => 3,
-                        ));
-                    ?>
-
-                    <?php while (have_posts()) : the_post(); ?>
-
-
-                        <div class="conf">
-                            <?php the_post_thumbnail(); ?>
-                            <div class="contenu">
-                                <h2><?php the_title(); ?></h2>
-                                <a href="">En savoir plus ></a>
+                        <?php foreach ($posts as $p): ?>
+                            
+                            <div class="conf">
+                                <?php echo get_the_post_thumbnail($p->ID); ?>
+                                <div class="contenu">
+                                    <h2><?php echo get_the_title($p->ID); ?></h2>
+                                    <a href="<?php echo get_permalink($p->ID); ?>">En savoir plus</a>
+                                </div>
                             </div>
-                        </div>
-
-                        
-                    <?php endwhile; ?>
-                    <?php else: ?>
-                    <p>Aucun article disponible!</p>
-                    <?php endif; ?>
+                        <?php endforeach; ?>
 
                     </div>
+                    <?php endif; ?>
                 </div>
+
+
+
+
             </div>
 
             <div class="pos-droite">
@@ -93,71 +79,88 @@
                     </a>
                 </div>
 
-                <div class="grid-gallerie">
-                    <div class="gallerie case1"></div>
-                    <div class="gallerie case2"></div>
-                    <div class="gallerie case3"></div>
-                    <div class="gallerie case4"></div>
-                </div>
+                <?php if (have_rows('wp_conferenciers_photo')) : ?>
+
+                    <div class="grid-gallerie">
+                        <?php while (have_rows('wp_conferenciers_photo')): the_row(); ?>
+                            <div class="gallerie set-bg" data-setbg="<?php echo the_sub_field('wp_photo_content'); ?>"></div>
+                        <?php endwhile; ?>
+                    </div>
+
+                <?php else: ?>
+                    <p>Aucun article disponible!</p>
+                <?php endif; ?>
+
             </div>
         </div>
 
+
         <div class="autre-evenements">
+
+
             <h3>Autres événements</h3>
 
             <div class="swiper-container carousel1" data-component="Carousel">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide img1"></div>
-                    <div class="swiper-slide img2"></div>
-                    <div class="swiper-slide img3"></div>
+
+                    <?php
+                    query_posts(array(
+                        'post_type' => 'wp_evenements',
+                        'post_status' => 'publish',
+                        'showposts' => -1,
+                    ));
+                    ?>
+
+                    <?php while (have_posts()) :
+                        the_post(); ?>
+
+                        <div class="swiper-slide img1 set-bg"
+                             data-setbg="<?php echo get_the_post_thumbnail_url(); ?>"></div>
+
+                    <?php endwhile; ?>
+                    <?php wp_reset_query(); ?>
+
+
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
+
 
             <h3>Autres Conférenciers</h3>
             <div class="swiper-container carousel2" data-component="Carousel" data-carousel="split">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide conf1">
-                        <div class="content-conf">
-                            <div class="name">Michaël Janes-Villiard</div>
-                            <div class="title">Modélisateur 3D</div>
+
+                    <?php
+                    query_posts(array(
+                        'post_type' => 'wp_conferencier',
+                        'post_status' => 'publish',
+                        'showposts' => -1,
+                    ));
+                    ?>
+
+                    <?php while (have_posts()) : the_post(); ?>
+
+
+                        <div class="swiper-slide conf1 set-bg"
+                             data-setbg="<?php echo get_the_post_thumbnail_url(); ?>">
+                            <div class="content-conf">
+                                <div class="name"><?php the_title(); ?></div>
+                                <div class="title"><?php echo the_field('wp_conferencier_title'); ?></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide conf2">
-                        <div class="content-conf">
-                            <div class="name">Noémie Tremblay</div>
-                            <div class="title">Artiste</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide conf3">
-                        <div class="content-conf">
-                            <div class="name">Julien Lacroix</div>
-                            <div class="title">Artiste</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide conf4">
-                        <div class="content-conf">
-                            <div class="name">Eleanor Rigby</div>
-                            <div class="title">Modélisatrice 3D</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide conf5">
-                        <div class="content-conf">
-                            <div class="name">Lucas Gagnon</div>
-                            <div class="title">Artiste</div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide conf6">
-                        <div class="content-conf">
-                            <div class="name">William Peak</div>
-                            <div class="title">Modéllisateur 3D</div>
-                        </div>
-                    </div>
+
+
+                    <?php endwhile; ?>
+                    <?php wp_reset_query(); ?>
+
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-    </div>
+        </div>
 
-
-    <?php get_footer(); ?>
+    <?php endwhile; ?>
+<?php else: ?>
+    <p>Aucun article disponible!</p>
+<?php endif; ?>
+<?php get_footer(); ?>

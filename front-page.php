@@ -1,22 +1,13 @@
   
 <?php get_header(); ?>
 
-        <div class="hero wrapper">
-            <div class="content-hero">
+        <?php if (have_posts()) : ?>
 
+        <?php while (have_posts()) : the_post(); ?>
+        <div class="hero  set-bg" data-setbg="<?php echo the_field('wp_hero_img'); ?>">
+            <div class="content-hero wrapper">
 
-
-            <?php if (have_posts()) : ?>
-
-            <?php
-                query_posts(array(
-                    'post_type' => 'page',
-                    'post_status' => 'publish',
-                    'showposts' => -1,
-                ));
-            ?>
-
-            <?php while (have_posts()) : the_post(); ?>
+            
 
 
                 <h1><?php echo the_field('wp_hero_titre'); ?></h1>
@@ -24,11 +15,6 @@
                 <div class="descrip"><?php echo the_field('wp_hero_description'); ?></div>
                 
 
-                
-            <?php endwhile; ?>
-            <?php else: ?>
-            <p>Aucun article disponible!</p>
-            <?php endif; ?>
 
             <div class="pos-bouton">
                     <a href="" class="bouton">
@@ -39,7 +25,11 @@
 
             </div>
         </div>
+                    <?php endwhile; ?>
 
+            <?php else: ?>
+            <p>Aucun article disponible!</p>
+            <?php endif; ?>
         <section class="partenaires">
             <div class="wrapper">
                 <h2>Nos partenaires</h2>
@@ -172,7 +162,7 @@
 
         
 
-        <section class="conferenciers">
+        <section class="conferenciers" id="conferenciers">
             <div class="wrapper">
                 <h2>Nos Conférenciers</h2>
 

@@ -1203,3 +1203,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Car
 /***/ })
 
 /******/ });
+
+"use strict";
+
+(function($) {
+/*------------------
+		Background set
+	--------------------*/
+	$('.set-bg').each(function() {
+		var bg = $(this).data('setbg');
+		$(this).css('background-image', 'url(' + bg + ')');
+	});
+})(jQuery);

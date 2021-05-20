@@ -31,7 +31,12 @@
             </div>
         </footer>
     </div>
+	<script src="<?php bloginfo('template_url'); ?>/scripts/jquery-3.2.1.min.js"></script>
+
+    <script src="<?php bloginfo(template_url); ?>/scripts/main.js" defer></script>
+
     <?php wp_footer() ?>
+
 </body>
 
 </html>

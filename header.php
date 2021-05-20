@@ -8,8 +8,6 @@
 
     <link rel="stylesheet" href="<?php bloginfo(template_url); ?>/styles/main.css" />
 
-    <script src="<?php bloginfo(template_url); ?>/scripts/main.js" defer></script>
-
     <?php wp_head(); ?>
 </head>
 
