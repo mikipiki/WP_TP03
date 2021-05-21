@@ -3,31 +3,42 @@
             <div class="wrapper">
             <a href="<?php bloginfo('url'); ?>"><img src="<?php echo the_field('wp_logo_site', 'option') ?>" alt="logo TimConf" />
             </a>
-            <?php wp_nav_menu(array(
-				'theme_location' => 'menu_footer',
-				'container'      => 'div',
-                'container_class'=> 'menu_footer',
-			)); ?>
+                <?php wp_nav_menu(array(
+                    'theme_location' => 'menu_footer',
+                    'container'      => 'div',
+                    'container_class'=> 'menu_footer',
+                )); ?>
+                
                 <div class="ligne"></div>
+
+
+
                 <div class="pos-footer">
                     <div class="icons">
-                        <a href="https://www.instagram.com/" target="_blank">
-                            <div class="size instagram"></div>
-                        </a>
-                        <a href="https://dribbble.com/" target="_blank">
-                            <div class="size dribble"></div>
-                        </a>
-                        <a href="https://twitter.com/HPHIGHPEN" target="_blank">
-                            <div class="size twitter"></div>
-                        </a>
-                        <a href="https://www.youtube.com/" target="_blank">
-                            <div class="size youtube"></div>
-                        </a>
+                        <?php if (have_rows('wp_footer_social')): ?>
+                            <?php while (have_rows('wp_footer_social')): the_row(); ?>
+                                
+                                <?php if (get_sub_field('wp_footer_social_nom') === 'Instagram') : ?>
+                                    <a href="<?php the_sub_field('wp_footer_social_url'); ?>"><i class="fab fa-instagram"></i></a>
+                                <?php elseif (get_sub_field('wp_footer_social_nom') === 'Youtube') : ?>
+                                    <a href="<?php the_sub_field('wp_footer_social_url'); ?>"><i class="fab fa-youtube"></i></a>
+                                <?php elseif (get_sub_field('wp_footer_social_nom') === 'Dribbble') : ?>
+                                    <a href="<?php the_sub_field('wp_footer_social_url'); ?>"><i class="fab fa-dribbble"></i></a>
+                                <?php elseif (get_sub_field('wp_footer_social_nom') === 'Twitter') : ?>
+                                    <a href="<?php the_sub_field('wp_footer_social_url'); ?>"><i class="fab fa-twitter"></i></a> 
+                                <?php endif; ?>    
+                                
+                            <?php endwhile; ?>
+                        
+                        <?php endif; ?> 
                     </div>
                     <div class="copyrights">
                         © 2020 TimConf. Tous droits réservés
                     </div>
                 </div>
+
+
+
             </div>
         </footer>
     </div>

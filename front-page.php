@@ -17,7 +17,7 @@
 
 
             <div class="pos-bouton">
-                    <a href="" class="bouton">
+                    <a href="<?php the_permalink(); ?>" class="bouton">
                         <p>Forfaits</p>
                     </a>
                 </div>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TimConf</title>
 
+    <script src="https://kit.fontawesome.com/53cd7e796a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?php bloginfo(template_url); ?>/styles/main.css" />
 
     <?php wp_head(); ?>

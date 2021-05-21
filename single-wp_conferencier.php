@@ -19,21 +19,8 @@
                         <?php the_content(); ?>
                     </p>
                 </div>
+            
 
-                <div class="icon-conferencier mobile">
-                    <a href="https://www.instagram.com/" target="_blank">
-                        <div class="size instagram"></div>
-                    </a>
-                    <a href="https://dribbble.com/" target="_blank">
-                        <div class="size dribble"></div>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank">
-                        <div class="size twitter"></div>
-                    </a>
-                    <a href="https://www.youtube.com/" target="_blank">
-                        <div class="size youtube"></div>
-                    </a>
-                </div>
 
                 <div class="conferences">
 
@@ -62,23 +49,29 @@
 
 
             </div>
-
             <div class="pos-droite">
-                <div class="icon-conferencier desktop">
-                    <a href="https://www.instagram.com/" target="_blank">
-                        <div class="size instagram"></div>
-                    </a>
-                    <a href="https://dribbble.com/" target="_blank">
-                        <div class="size dribble"></div>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank">
-                        <div class="size twitter"></div>
-                    </a>
-                    <a href="https://www.youtube.com/" target="_blank">
-                        <div class="size youtube"></div>
-                    </a>
+            <div class="icon-conferencier desktop">
+                <?php if (have_rows('wp_conferenciers_social')): ?>
+                    <?php while (have_rows('wp_conferenciers_social')): the_row(); ?>
+
+                        <?php if (get_sub_field('wp_social_name') === 'Instagram') : ?>
+                            <a href="<?php the_sub_field('wp_social_content'); ?>"><i class="fab fa-instagram"></i></a>
+                        <?php elseif (get_sub_field('wp_social_name') === 'Youtube') : ?>
+                            <a href="<?php the_sub_field('wp_social_content'); ?>"><i class="fab fa-youtube"></i></a>
+                        <?php elseif (get_sub_field('wp_social_name') === 'Dribbble') : ?>
+                            <a href="<?php the_sub_field('wp_social_content'); ?>"><i class="fab fa-dribbble"></i></a>
+                        <?php elseif (get_sub_field('wp_social_name') === 'Twitter') : ?>
+                            <a href="<?php the_sub_field('wp_social_content'); ?>"><i class="fab fa-twitter"></i></a> 
+                        <?php endif; ?>    
+
+                    <?php endwhile; ?>
+                    
+                <?php endif; ?>    
                 </div>
 
+
+
+            <div>
                 <?php if (have_rows('wp_conferenciers_photo')) : ?>
 
                     <div class="grid-gallerie">
@@ -90,6 +83,8 @@
                 <?php else: ?>
                     <p>Aucun article disponible!</p>
                 <?php endif; ?>
+
+            </div>
 
             </div>
         </div>
@@ -111,8 +106,7 @@
                     ));
                     ?>
 
-                    <?php while (have_posts()) :
-                        the_post(); ?>
+                    <?php while (have_posts()) : the_post(); ?>
 
                         <div class="swiper-slide img1 set-bg"
                              data-setbg="<?php echo get_the_post_thumbnail_url(); ?>"></div>
@@ -138,17 +132,21 @@
                     ));
                     ?>
 
+                
                     <?php while (have_posts()) : the_post(); ?>
 
+                    
 
                         <div class="swiper-slide conf1 set-bg"
                              data-setbg="<?php echo get_the_post_thumbnail_url(); ?>">
-                            <div class="content-conf">
-                                <div class="name"><?php the_title(); ?></div>
-                                <div class="title"><?php echo the_field('wp_conferencier_title'); ?></div>
-                            </div>
+                             <a href="<?php the_permalink(); ?>">
+                                <div class="content-conf">
+                                    <div class="name"><?php the_title(); ?></div>
+                                    <div class="title"><?php echo the_field('wp_conferencier_title'); ?></div>
+                                </div>
+                            </a>    
                         </div>
-
+                    
 
                     <?php endwhile; ?>
                     <?php wp_reset_query(); ?>
@@ -157,7 +155,7 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-        </div>
+        
 
     <?php endwhile; ?>
 <?php else: ?>

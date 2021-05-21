@@ -1,6 +1,15 @@
   
 <?php get_header(); ?>
 
-yo
+<div class="wrapper">
+
+<?php the_post_thumbnail(); ?>
+
+<?php the_title(); ?>
+<?php the_content(); ?>
+
+
+</div>
+
        
 <?php get_footer(); ?>
